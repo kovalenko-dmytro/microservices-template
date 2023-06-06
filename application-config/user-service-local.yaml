@@ -1,0 +1,80 @@
+spring:
+  application:
+    name: user-service  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/db.changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:54320/user_service_db
+    username: postgres
+    password: root
+  swagger:
+    autostart: false
+  mvc:
+    log-resolved-exception: false
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:9411/    
+    service:
+      name: user-service
+    sender:
+      type: rabbit
+    storage:
+      type: elasticsearch
+      elasticsearch:
+        hosts: localhost:9200            
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
+      namespace: spring:session:template
+  redis:
+    host: localhost
+    port: 6379
+    password: admin  
+
+springdoc:
+  api-docs:
+    path: /api-docs    
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    region: default
+    register-with-eureka: true
+    fetch-registry: true
+    registryFetchIntervalSeconds: 20
+    serviceUrl:
+      defaultZone: http://admin:admin@localhost:8082/discovery-service/eureka/
+
+feign:
+  autoconfiguration:
+    jackson:
+      enabled: true
+  hystrix:
+    enabled: true
+
+server:
+  port: 8084
+  forward-headers-strategy: framework
+  servlet:
+    context-path: /user-service
+    session:
+      cookie:
+        path: /
+        name: SESSION
+        http-only: true 
+        domain: localhost
+        secure: true 
+      timeout: 3600    
