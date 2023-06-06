@@ -14,6 +14,7 @@ spring:
         git:
           default-label: ${CONFIG_SERVICE_GIT_URI_BRANCH}
           uri: ${CONFIG_SERVICE_GIT_URI}
+          search-paths: ${CONFIG_SERVICE_GIT_DIR_PATH}
           username: ${CONFIG_SERVICE_GIT_URI_USERNAME}
           password: ${CONFIG_SERVICE_GIT_URI_PASSWORD}
 
